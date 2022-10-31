@@ -100,11 +100,10 @@ class Colors(commands.Cog, name="colors"):
         """
         try:
             userRoles = interaction.user.roles
-            
+
             if color is None:
-                print("color is empty")
-                # generate random color
-                color = self.generateRandomColor()
+                color = self.generateRandomColor()  # generate random color
+                
 
             colorButton = Button(label="Another Color", style=nextcord.ButtonStyle.blurple)
 

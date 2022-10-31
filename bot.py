@@ -26,10 +26,10 @@ intents = nextcord.Intents.default().all()
 bot = Bot(command_prefix=config["bot_prefix"], intents=intents)
 
 # imChecker = imchecker.ImChecker()
-reminderChecker = reminderLoop.ReminderLoop()
-birthdayChecker = birthdayLoop.BirthdayLoop(bot)
+# reminderChecker = reminderLoop.ReminderLoop()
+# birthdayChecker = birthdayLoop.BirthdayLoop(bot)
 haikuDetector = haikudetector.HaikuDetector()
-scooby = scooby.Scooby(bot)
+# scooby = scooby.Scooby(bot)
 
 # The code in this even is executed when the bot is ready
 @bot.event
