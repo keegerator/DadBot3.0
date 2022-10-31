@@ -38,6 +38,7 @@ class Fun(commands.Cog, name="fun"):
         headers = {'Accept': 'application/json'}
         r = requests.get(url, headers=headers)
         json = r.json()
+
         try:
             await interaction.response.send_message(random.choice(json["results"])["joke"])
         except:

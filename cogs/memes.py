@@ -21,19 +21,19 @@ class Memes(commands.Cog, name="memes"):
         with open("./resources/emoji-mappings.json", encoding="utf8") as file:
             self.emoji_mappings = json.load(file)
 
-    @nextcord.slash_command(name="megamind", description="Make a No B*tches? Megamind meme with custom text")
-    async def megamind(self, interaction: Interaction, text: str = SlashOption(description="Text to put on the meme", required=True)):
-        """
-        [Text] Make a No B*tches? Megamind meme with custom text
-        """
-        params = {
-            "template_id": "370867422", 
-            "username": "nanosplitter", 
-            "password": config["imgflip_pass"],
-            "text0": text,
-        }
-        r = requests.post("https://api.imgflip.com/caption_image", params=params)
-        await interaction.response.send_message(r.json()["data"]["url"])
+    # @nextcord.slash_command(name="megamind", description="Make a No B*tches? Megamind meme with custom text")
+    # async def megamind(self, interaction: Interaction, text: str = SlashOption(description="Text to put on the meme", required=True)):
+    #     """
+    #     [Text] Make a No B*tches? Megamind meme with custom text
+    #     """
+    #     params = {
+    #         "template_id": "370867422", 
+    #         "username": "nanosplitter", 
+    #         "password": config["imgflip_pass"],
+    #         "text0": text,
+    #     }
+    #     r = requests.post("https://api.imgflip.com/caption_image", params=params)
+    #     await interaction.response.send_message(r.json()["data"]["url"])
 
     @nextcord.message_command(name="uwu")
     async def uwu(self, interaction: Interaction, message: nextcord.Message):
