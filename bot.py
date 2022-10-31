@@ -45,7 +45,7 @@ async def on_ready():
 # Setup the game status task of the bot
 @tasks.loop(minutes=1.0)
 async def status_task():
-    statuses = ["checkers with Michael Jackson", "with tiny kittens", "the fiddle with Death", "with myself :smirk:"]
+    statuses = ["checkers with Michael Jackson", "with tiny kittens", "the fiddle with Death", "with your emotions ;)", "with whips and chains"]
     await bot.change_presence(activity=nextcord.Game(random.choice(statuses)))
 
 
