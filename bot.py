@@ -7,9 +7,9 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from noncommands import haikudetector
 # from noncommands import imchecker
-from noncommands import reminderLoop
-from noncommands import birthdayLoop
-from noncommands import scooby
+# from noncommands import reminderLoop
+# from noncommands import birthdayLoop
+# from noncommands import scooby
 
 import nextcord
 import yaml
