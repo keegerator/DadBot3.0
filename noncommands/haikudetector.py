@@ -25,8 +25,6 @@ def sylco(words):
     res = sum([sylcoOneWord(re.sub(r'[^\w\s]', '', w).lower()) for w in words.split()])
     return res
 
-
-
 def popNumSyl(syl, words):
     res = []
     while syl > 0 and len(words) > 0:

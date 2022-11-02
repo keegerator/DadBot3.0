@@ -11,44 +11,44 @@ import random
 with open("config.yaml") as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 
-class ImChecker:
-    def __init__(self):
-        self.imList = [" im ", " i'm ", " Im ", " I'm ", " IM ", " I'M ", " i am ", " I am ", " I AM ", " lm ", " l'm ", " lM ", " l'M ", " l am ", " l AM "]
-        self.confusables = Confusables('./resources/likeness.txt')
+# class ImChecker:
+#     def __init__(self):
+#         self.imList = [" im ", " i'm ", " Im ", " I'm ", " IM ", " I'M ", " i am ", " I am ", " I AM ", " lm ", " l'm ", " lM ", " l'M ", " l am ", " l AM "]
+#         self.confusables = Confusables('./resources/likeness.txt')
 
-    async def checkIm(self, message):
-        for string in self.imList:
-            cpattern = self.confusables.confusables_regex(string)
-            r = re.compile(cpattern)
-            fake_string = " " + message.content
-            res = r.match(fake_string)
-            rand = random.randint(0, 9)
+#     async def checkIm(self, message):
+#         for string in self.imList:
+#             cpattern = self.confusables.confusables_regex(string)
+#             r = re.compile(cpattern)
+#             fake_string = " " + message.content
+#             res = r.match(fake_string)
+#             rand = random.randint(0, 9)
 
-            if res and rand == 3:
-                typeIm = res.group().strip() + " "
-                await message.reply("Hi " + str(message.content).split(typeIm, 1)[1] + ", I'm Dad")
-                mydb = mysql.connector.connect(
-                    host=config["dbhost"],
-                    user=config["dbuser"],
-                    password=config["dbpassword"],
-                    database=config["databasename"]
-                )
-                mycursor = mydb.cursor(buffered=True)
+#             if res and rand == 3:
+#                 typeIm = res.group().strip() + " "
+#                 await message.reply("Hi " + str(message.content).split(typeIm, 1)[1] + ", I'm Dad")
+#                 mydb = mysql.connector.connect(
+#                     host=config["dbhost"],
+#                     user=config["dbuser"],
+#                     password=config["dbpassword"],
+#                     database=config["databasename"]
+#                 )
+#                 mycursor = mydb.cursor(buffered=True)
 
-                mycursor.execute("SELECT * FROM caught WHERE user = '" + str(message.author) + "'")
-                hascolumn = False
-                for m in mycursor:
-                    hascolumn = True
+#                 mycursor.execute("SELECT * FROM caught WHERE user = '" + str(message.author) + "'")
+#                 hascolumn = False
+#                 for m in mycursor:
+#                     hascolumn = True
 
-                if not hascolumn:
-                    mycursor.execute("INSERT INTO caught (user, count) VALUES ('"+ str(message.author) +"', 1)")
-                else:
-                    mycursor.execute("UPDATE caught SET count = count + 1 WHERE user = '" + str(message.author) + "'")
+#                 if not hascolumn:
+#                     mycursor.execute("INSERT INTO caught (user, count) VALUES ('"+ str(message.author) +"', 1)")
+#                 else:
+#                     mycursor.execute("UPDATE caught SET count = count + 1 WHERE user = '" + str(message.author) + "'")
 
-                mydb.commit()
-                mycursor.close()
-                mydb.close()
-                break
+#                 mydb.commit()
+#                 mycursor.close()
+#                 mydb.close()
+#                 break
 
 class Confusables:
     def __init__(self, confusables_filename):

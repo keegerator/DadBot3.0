@@ -23,7 +23,7 @@ class Info(commands.Cog, name="info"):
         [No Arguments] Get some useful (or not) information about the bot.
         """
         embed = nextcord.Embed(
-            description="The server's dad",
+            description="The server's Sexy Demon",
             color=config["success"]
         )
         embed.set_author(
@@ -31,7 +31,7 @@ class Info(commands.Cog, name="info"):
         )
         embed.add_field(
             name="Owner:",
-            value="Nanosplitter#4549",
+            value="keegan#5989",
             inline=True
         )
         embed.add_field(

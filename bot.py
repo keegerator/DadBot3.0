@@ -6,10 +6,10 @@ import re
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.cron import CronTrigger
 from noncommands import haikudetector
-from noncommands import imchecker
-from noncommands import reminderLoop
-from noncommands import birthdayLoop
-from noncommands import scooby
+# from noncommands import imchecker
+# from noncommands import reminderLoop
+# from noncommands import birthdayLoop
+# from noncommands import scooby
 
 import nextcord
 import yaml
@@ -25,11 +25,11 @@ intents = nextcord.Intents.default().all()
 
 bot = Bot(command_prefix=config["bot_prefix"], intents=intents)
 
-imChecker = imchecker.ImChecker()
-reminderChecker = reminderLoop.ReminderLoop()
-birthdayChecker = birthdayLoop.BirthdayLoop(bot)
+# imChecker = imchecker.ImChecker()
+# reminderChecker = reminderLoop.ReminderLoop()
+# birthdayChecker = birthdayLoop.BirthdayLoop(bot)
 haikuDetector = haikudetector.HaikuDetector()
-scooby = scooby.Scooby(bot)
+# scooby = scooby.Scooby(bot)
 
 # The code in this even is executed when the bot is ready
 @bot.event
@@ -45,7 +45,7 @@ async def on_ready():
 # Setup the game status task of the bot
 @tasks.loop(minutes=1.0)
 async def status_task():
-    statuses = ["with your mom"]
+    statuses = ["checkers with Michael Jackson", "with tiny kittens", "the fiddle with Death", "with your emotions ;)", "with whips and chains", "with fire"]
     await bot.change_presence(activity=nextcord.Game(random.choice(statuses)))
 
 
@@ -76,7 +76,7 @@ async def on_message(message):
         return
     
     if not re.search("(\|\|[\S\s]*\|\|)", message.content):
-        await imChecker.checkIm(message)
+        # await imChecker.checkIm(message)
         await haikuDetector.checkForHaiku(message)
 
     await bot.process_commands(message)
@@ -116,15 +116,15 @@ async def on_command_error(context, error):
     if not isinstance(error, commands.errors.CommandNotFound):
         raise error
 
-@tasks.loop(seconds=5)
-async def checkTimes():
-    await reminderChecker.checkReminders(bot)
-    await reminderChecker.deleteOldReminders(bot)
+# @tasks.loop(seconds=5)
+# async def checkTimes():
+#     await reminderChecker.checkReminders(bot)
+#     await reminderChecker.deleteOldReminders(bot)
 
-checkTimes.start()
-scheduler = AsyncIOScheduler()
-scheduler.add_job(scooby.whatsTheMove, CronTrigger(hour = "18", minute = "0", second = "0", timezone="EST"))
-scheduler.add_job(birthdayChecker.checkBirthdays, CronTrigger(hour = "9", minute = "0", second = "0", timezone="EST"))
-scheduler.add_job(scooby.praiseFireGator, CronTrigger(day_of_week="wed", hour = "23", minute = "0", second = "0", timezone="EST"))
-scheduler.start()
+# checkTimes.start()
+# scheduler = AsyncIOScheduler()
+# scheduler.add_job(scooby.whatsTheMove, CronTrigger(hour = "18", minute = "0", second = "0", timezone="EST"))
+# scheduler.add_job(birthdayChecker.checkBirthdays, CronTrigger(hour = "9", minute = "0", second = "0", timezone="EST"))
+# scheduler.add_job(scooby.praiseFireGator, CronTrigger(day_of_week="wed", hour = "23", minute = "0", second = "0", timezone="EST"))
+# scheduler.start()
 bot.run(config["token"])
