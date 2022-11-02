@@ -1,0 +1,16 @@
+bot_prefix: "/"
+token: "MTAxOTI5ODAyOTQ5NDM0OTg2NQ.GTyDp3.eW5vJ-0hUzCNMvE7ANn-Z1Y7fwAtHjAp3cHgfA"
+application_id: "1019298029494349865"
+dbhost: "DATABASE_HOSTENAME"
+dbuser: "DATABASE_USERNAME"
+dbpassword: "DATABASE_PASSWORD"
+databasename: "DATABASE_NAME"
+owners:
+  - 293482309296848896
+blacklist:
+  - 000000000000000000
+main_color: 0xD75BF4
+error: 0xE02B2B
+success: 0x42F56C
+warning: 0xF59E42
+info: 0x4299F5
