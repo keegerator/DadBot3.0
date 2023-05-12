@@ -39,7 +39,10 @@ async def on_ready():
     print(f"Python version: {platform.python_version()}")
     print(f"Running on: {platform.system()} {platform.release()} ({os.name})")
     print("-------------------")
-    status_task.start()
+
+
+    if not status_task.is_running():
+        status_task.start()
 
 
 # Setup the game status task of the bot
@@ -77,7 +80,8 @@ async def on_message(message):
     
     if not re.search("(\|\|[\S\s]*\|\|)", message.content):
         # await imChecker.checkIm(message)
-        await haikuDetector.checkForHaiku(message)
+        if message.channel.id != 1034850979411148840:   # will not check for haikus in #kvetching, for sensitivity reasons
+            await haikuDetector.checkForHaiku(message)
 
     await bot.process_commands(message)
     

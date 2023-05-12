@@ -3,6 +3,7 @@ import yaml
 import sys
 import os
 import cmudict
+import nextcord
 
 cd = cmudict.dict()
 
@@ -19,10 +20,23 @@ def sylcoOneWord(word):
     if phones:                   # if the list isn't empty (the word was found)
         phones0 = phones[0]      #     process the first
         count = len([p for p in phones0 if p[-1].isdigit()]) # count the vowels
+    else:
+        # throw error, don't produce haiku
+        count = -1
+        
     return count
 
 def sylco(words):
-    res = sum([sylcoOneWord(re.sub(r'[^\w\s]', '', w).lower()) for w in words.split()])
+    # res = sum([sylcoOneWord(re.sub(r'[^\w\s]', '', w).lower()) for w in words.split()])
+    res = 0
+    for w in words.split():
+        temp = sylcoOneWord(re.sub(r'[^\w\s]', '', w).lower())
+        if temp != -1:
+            res += temp
+        else:
+            res = -1
+            return res
+
     return res
 
 def popNumSyl(syl, words):
@@ -50,4 +64,4 @@ class HaikuDetector:
                 for line in [i[1] for i in poem]:
                     res += "*" + " ".join(line) + "*\n"
                 res += "\n -" + message.author.mention
-                await message.reply(res)
+                await message.channel.send(res)
